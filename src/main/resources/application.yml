@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: orders-service
+  mvc:
+    problemdetails:
+      enabled: true
+  jackson:
+    default-property-inclusion: non_null
