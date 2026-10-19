@@ -1,0 +1,8 @@
+# Contracts and guardrails need an explicit human owner's review.
+# Replace the handles with your team's.
+/contracts/            @your-org/api-owners
+/.claude/settings.json @your-org/tech-leads
+/.claude/hooks/        @your-org/tech-leads
+/scripts/              @your-org/tech-leads
+/docs/adr/             @your-org/tech-leads
+/docs/specs/           @your-org/product

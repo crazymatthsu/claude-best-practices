@@ -1,0 +1,56 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # scripts diff against the base branch
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+      - uses: gradle/actions/setup-gradle@v4 # caching + wrapper validation
+      - name: Tests accompany production changes
+        if: github.event_name == 'pull_request'
+        run: scripts/check-tests-present.sh origin/${{ github.base_ref }}
+      - name: Contract changes are versioned and recorded
+        if: github.event_name == 'pull_request'
+        run: scripts/check-contract-change.sh origin/${{ github.base_ref }}
+      - name: Build, unit + integration + contract tests, architecture rules, coverage gate
+        run: ./gradlew check --console=plain
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-and-coverage-reports
+          path: |
+            build/reports/jacoco/
+            build/reports/tests/
+
+  contract-compat:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Detect breaking changes in existing contract versions (oasdiff)
+        run: |
+          set -euo pipefail
+          base="origin/${{ github.base_ref }}"
+          for spec in contracts/openapi/*.yaml; do
+            if git cat-file -e "$base:$spec" 2>/dev/null; then
+              mkdir -p /tmp/base/$(dirname "$spec")
+              git show "$base:$spec" > "/tmp/base/$spec"
+              echo "::group::oasdiff $spec"
+              docker run --rm -v /tmp/base:/base -v "$PWD":/rev tufin/oasdiff \
+                breaking "/base/$spec" "/rev/$spec" --fail-on ERR
+              echo "::endgroup::"
+            fi
+          done
