@@ -6,6 +6,7 @@
       "Bash(scripts/verify.sh:*)",
       "Bash(scripts/check-tests-present.sh:*)",
       "Bash(scripts/check-contract-change.sh:*)",
+      "Bash(python3 scripts/docs/:*)",
       "Bash(git status:*)",
       "Bash(git diff:*)",
       "Bash(git log:*)",

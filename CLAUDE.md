@@ -29,6 +29,8 @@ Details and diagrams: `docs/architecture/overview.md`. Read it only when you cha
 - Feature specs with acceptance criteria: `docs/specs/` (e.g. `ORD-002-cancel-order.md`)
 - ADRs: `docs/adr/`. Contract history: `contracts/CHANGELOG.md`
 - Path-scoped coding rules are loaded automatically from `.claude/rules/`
+- Technical docs (architecture documents, performance reports, Confluence): templates in `docs/templates/tech-doc/`,
+  scripts in `scripts/docs/`; use the `tech-doc`, `perf-report` and `confluence-publish` skills
 
 ## Working style
 - For anything bigger than a small fix, plan first. Read the spec, list the files you'll touch and the tests

@@ -42,3 +42,7 @@ CLAUDE.local.md
 # Secrets
 .env
 .env.*
+
+# Python (scripts/docs)
+__pycache__/
+*.pyc

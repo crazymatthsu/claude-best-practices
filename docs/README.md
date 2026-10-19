@@ -50,11 +50,13 @@ flowchart TB
 | 11 | [Playbook: Java developers](11-playbook-java-developers.md) | worked example: ORD-002 |
 | 12 | [Playbook: project managers](12-playbook-project-managers.md) | `docs/specs/` |
 | 13 | [Adopting in a new project and measuring the gain](13-adopting-and-measuring.md) | copy list + metrics |
+| 14 | [Technical documentation: architecture docs, performance reports, Confluence](14-technical-documentation.md) | `.claude/skills/tech-doc/`, `docs/templates/tech-doc/`, `scripts/docs/` |
 
 ## Reading paths
 
 - **Java developer, first day:** 01 → 02 → 08 → 07 → 11
-- **Tech lead setting up a repo:** 01 → 02 → 05 → 03 → 04 → 09 → 13
+- **Tech lead setting up a repo:** 01 → 02 → 05 → 03 → 04 → 09 → 13 → 14
+- **Architect or anyone writing design docs and performance reports:** 10 → 14 → 07
 - **Project / product manager:** 01 (first half) → 12 → 07 (the "why") → 13 (metrics)
 
 ## The demo project
