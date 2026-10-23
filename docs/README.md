@@ -52,6 +52,13 @@ flowchart TB
 | 13 | [Adopting in a new project and measuring the gain](13-adopting-and-measuring.md) | copy list + metrics |
 | 14 | [Technical documentation: architecture docs, performance reports, Confluence](14-technical-documentation.md) | `.claude/skills/tech-doc/`, `docs/templates/tech-doc/`, `scripts/docs/` |
 
+## Training materials
+
+Enterprise training built on this guide, for executives, platform and security teams, tech leads, developers and
+product: [`docs/training/`](training/README.md). Start with the
+[executive briefing](training/00-executive-briefing.md), then the ten modules, the workflow catalogue and the
+rollout templates (policy, repository readiness checklist, managed settings, KPI scorecard).
+
 ## Reading paths
 
 - **Java developer, first day:** 01 → 02 → 08 → 07 → 11
