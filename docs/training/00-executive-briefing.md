@@ -172,15 +172,15 @@ foundation for level 3.*
 gantt
     dateFormat  YYYY-MM-DD
     axisFormat  %b
-    section Days 0 to 30: foundation
-    Decisions: deployment, owners, pilot scope       :a1, 2026-11-02, 10d
+    section Days 0 to 30 foundation
+    Decisions on deployment, owners, pilot scope    :a1, 2026-11-02, 10d
     Managed settings v0.1, telemetry switched on     :a2, after a1, 10d
     Reference config in 3 to 5 pilot repos, baseline :a3, after a1, 15d
-    section Days 31 to 60: pilot
+    section Days 31 to 60 pilot
     Role-based training                              :b1, 2026-12-01, 15d
     Pilot teams deliver with WF-01, WF-02, WF-05     :b2, 2026-12-01, 30d
     Weekly office hours feed rules and hooks         :b3, 2026-12-08, 25d
-    section Days 61 to 90: scale
+    section Days 61 to 90 scale
     Internal plugin, MCP catalogue, policy v1.0      :c1, 2027-01-04, 20d
     KPI review and go or no-go for wave two          :c2, after c1, 7d
 ```
