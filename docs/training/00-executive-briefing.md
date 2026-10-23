@@ -99,7 +99,7 @@ flowchart TB
 
 | Layer | Set by | Typical content | How it is enforced |
 |---|---|---|---|
-| Organisation (managed settings) | CISO, platform | deny lists for secrets and destructive commands; bypass mode disabled; approved MCP servers and plugin sources; telemetry on; the approved API endpoint | deployed to devices by IT; takes precedence over everything else |
+| Organisation (managed settings) | CISO, platform | deny lists for secrets and destructive commands; bypass mode disabled; approved MCP servers and plugin sources; telemetry on; the approved endpoint and sign-in | deployed to devices by IT (file, MDM profile or registry) or from the claude.ai admin console; takes precedence over everything else |
 | Project (repository) | tech leads | build commands, non-negotiables, allow/ask lists, hooks, skills, subagents, CODEOWNERS | reviewed in pull requests; the guardrail files themselves are owned by tech leads |
 | User | each developer | personal style, local tool paths | may tighten the layers above, never loosen them |
 
@@ -110,7 +110,7 @@ Details and exact file names: [module 02](modules/02-governance-framework.md) an
 
 | # | Family | What it governs | Module |
 |---|---|---|---|
-| 1 | Identity and deployment | who may use it, through which endpoint (Anthropic API, AWS Bedrock, Google Vertex AI, Microsoft Foundry, an LLM gateway), with what data retention | [08](modules/08-security-privacy-compliance.md) |
+| 1 | Identity and deployment | who may use it, through which endpoint (Claude for Enterprise, the Anthropic API, AWS Bedrock, Google Cloud, Microsoft Foundry, an LLM gateway or the self-hosted Claude apps gateway), with what data retention | [08](modules/08-security-privacy-compliance.md) |
 | 2 | Permissions | which tools and commands run freely, need confirmation, or are forbidden | [04](modules/04-permissions-and-hooks.md) |
 | 3 | Hooks and gates | what must happen before or after an action: gate before push, tests before "done", human confirmation on contracts | [04](modules/04-permissions-and-hooks.md) |
 | 4 | Context standards | how repositories tell the agent their rules without noise | [03](modules/03-context-and-memory.md) |
@@ -219,8 +219,9 @@ pilot and design a fair comparison ([module 09](modules/09-observability-cost-ro
 
 ## 14. Decisions requested today
 
-1. **Deployment model.** Anthropic API through Claude for Enterprise, our cloud provider (Bedrock, Vertex AI or
-   Foundry), or our LLM gateway. This drives identity, billing, data residency and retention.
+1. **Deployment model.** Claude for Enterprise, the Anthropic API, our cloud provider (AWS Bedrock, Google Cloud,
+   Microsoft Foundry), an LLM gateway, or the self-hosted Claude apps gateway. This drives identity, billing,
+   data residency and retention.
 2. **Policy ownership.** Security owns the organisation layer, platform operates it, tech leads own the
    repository layer.
 3. **Pilot scope.** Three to five teams with a real backlog, mixed stacks and willing tech leads.
@@ -232,7 +233,8 @@ pilot and design a fair comparison ([module 09](modules/09-observability-cost-ro
 
 - Not a replacement for code review or ownership. Humans approve intent and risk; machines check what machines
   check better.
-- Not zero risk. Controls reduce risk and make the residual visible and measurable.
+- Not zero risk. Controls reduce risk and make the residual visible and measurable. Device-level settings are a
+  client-side control; branch protection, CI and server-side credentials are the backstop.
 - No productivity numbers until we have measured our own baseline. Vendor figures are not our figures.
 
 ## Appendix

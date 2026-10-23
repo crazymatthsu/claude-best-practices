@@ -114,4 +114,7 @@ A standing exception becomes a policy change at the next review.
 | 6 tests before the PR | Stop hook, gate script, CI, PR template | `.claude/hooks/require-tests-on-stop.sh`, `scripts/verify.sh`, `.github/` |
 | 7 approved servers only | MCP allowlist | managed settings |
 | 8 human approval | branch protection, CODEOWNERS | Git hosting |
-| 9 telemetry | OpenTelemetry settings | managed settings |
+| 9 telemetry | OpenTelemetry settings | managed `env` block |
+| 3 approved endpoint and sign-in | login and provider enforcement | `forceLoginMethod`, `forceLoginOrgUUID`, `allowedProviders` |
+| 5 bypass prohibited | mode kill switch | `permissions.disableBypassPermissionsMode` |
+| 4 production data never written | sandbox and MCP scope | `sandbox.network.allowedDomains`, read-only tokens |

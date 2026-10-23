@@ -30,7 +30,9 @@ After this module, participants can:
    when a test and a spec disagree. It is fast, so habits scale. It reads untrusted content (web pages,
    dependencies, issues), which can carry hidden instructions. It can reach other systems through integrations.
 6. **Session modes.** Default (asks before changes), plan (read-only planning), accept-edits (file edits run
-   without prompts), bypass (no prompts at all, to be disabled centrally), headless (scripted, non-interactive).
+   without prompts), auto (a classifier decides what to ask about; the starting mode in recent versions unless
+   policy pins another), don't-ask (denies anything that would prompt; for unattended runs), bypass (no prompts
+   at all, to be disabled centrally), and headless (scripted, non-interactive).
 7. **Where governance attaches.** A preview of the control families in modules 02 to 09, each mapped to one
    of the risks above.
 

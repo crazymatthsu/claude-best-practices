@@ -13,7 +13,7 @@ Written for readers who do not use Claude Code daily. Terms link to the module t
 | **Nested memory** | A `CLAUDE.md` inside a directory, loaded only when the agent works there. Used for areas with different rules, such as API contracts or generated code | 03 |
 | **Progressive disclosure** | Keeping always-loaded context tiny and loading detail on demand (rules, skills, linked documents) | 03 |
 | **Permission rule** | A setting that marks a tool or command pattern as `allow` (runs freely), `ask` (human confirms) or `deny` (never) | [04](modules/04-permissions-and-hooks.md) |
-| **Permission mode** | The session's overall stance: default (ask before changes), plan (read-only planning), accept edits, and bypass (no prompts; disabled centrally in managed environments) | 04 |
+| **Permission mode** | The session's overall stance: default (ask before changes), plan (read-only planning), accept edits, auto (a classifier decides what to ask about; the starting mode in recent versions unless policy pins another), don't-ask (for unattended runs) and bypass (no prompts; disabled centrally in managed environments) | 04 |
 | **Plan mode** | A read-only mode in which the agent proposes a plan for approval before any file changes. The cheapest moment to correct course | 04 |
 | **Hook** | A shell command the Claude Code harness runs at fixed events (before a tool runs, after it, when the agent wants to stop). Runs every time, regardless of what the model decides. The main deterministic control | 04 |
 | **Gate** | A script that must pass before code leaves the machine (here `scripts/verify.sh`), run by a hook before push and by CI on the server | [07](modules/07-quality-gates-and-sdlc.md) |

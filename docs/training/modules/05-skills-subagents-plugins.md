@@ -35,8 +35,11 @@
 6. **Plugins and marketplaces.** A plugin bundles skills, subagents, hooks, slash commands and MCP configuration.
    Marketplaces are catalogues of plugins; an organisation can host one in an internal Git repository and
    developers install from it with `/plugin`. The plugin is how the reference configuration reaches two hundred
-   repositories without two hundred copies. Managed settings can pre-register the marketplaces developers may
-   use (see module 02 for the setting names).
+   repositories without two hundred copies. Managed settings register the internal marketplace
+   (`extraKnownMarketplaces`), force-enable or block plugins (`enabledPlugins`), and restrict sources
+   (`strictKnownMarketplaces`, `blockedMarketplaces`, `disableSideloadFlags`); `strictPluginOnlyCustomization`
+   limits skills, agents, hooks and MCP to plugins and managed settings. Organisation-wide subagents can also
+   ship in the managed settings directory. See module 02 for the locks.
 7. **Governance of the extension surface.** Who may publish enterprise-wide skills and agents. Review before
    publishing, like any dependency. Version the plugin; repositories pin a version. Risky skills manual-only.
    Agent prompts stay factual and short.

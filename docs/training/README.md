@@ -63,7 +63,7 @@ docs/training/
 └── templates/                         # copy-and-fill artefacts for the rollout
     ├── governance-policy-template.md  # an AI coding agent usage policy, section by section
     ├── repo-readiness-checklist.md    # what must be true before Claude Code is enabled on a repository
-    ├── managed-settings.example.json  # an organisation-level settings file with the usual deny lists
+    ├── managed-settings.example.json  # an organisation-level settings file, explained key by key in WF-09
     ├── kpi-scorecard.md               # baseline / target / current per KPI
     └── workflow-card-template.md      # write your own workflow cards in the same shape
 ```

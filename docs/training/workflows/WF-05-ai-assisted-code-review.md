@@ -45,7 +45,9 @@ flowchart LR
 
 1. **Read-only or comment-only.** Grant push rights only after you have reviewed exactly what it may push and why.
 2. **Separate identity.** A dedicated bot account or app with its own token, scoped to the repository.
-3. **Pin the action version** and review upgrades like any dependency.
+3. **Pin the action version** and review upgrades like any dependency. Restrict tools with `--allowedTools` and
+   turns with `--max-turns` in `claude_args`; bots cannot trigger it unless listed in `allowed_bots`; prefer a
+   custom GitHub App with Contents, Issues and Pull requests over the broad default permission set.
 4. **Same configuration as local.** The action reads the repository's `CLAUDE.md`, rules and agents, so review
    standards are identical on a laptop and in CI.
 5. **Treat content as untrusted.** PR descriptions, issue comments and CI logs can carry injected instructions.
