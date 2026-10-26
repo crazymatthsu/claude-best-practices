@@ -1,0 +1,80 @@
+{
+  "name": "tol",
+  "description": "Paul Tol's 'vibrant' qualitative scheme, designed to stay distinct under colour-vision deficiency and in print.",
+  "source": "Paul Tol, 'Colour schemes' technical note (SRON), vibrant scheme",
+  "series": [
+    "#0077bb",
+    "#ee7733",
+    "#009988",
+    "#cc3311",
+    "#33bbee",
+    "#ee3377"
+  ],
+  "threshold": "#aa3377",
+  "chrome": {
+    "surface": "#ffffff",
+    "ink": "#1a1a1a",
+    "ink2": "#4d4d4d",
+    "muted": "#808080",
+    "grid": "#e6e6e6",
+    "axis": "#c8c8c8"
+  },
+  "mermaid": {
+    "theme": "base",
+    "themeVariables": {
+      "fontFamily": "system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif",
+      "fontSize": "14px",
+      "background": "#ffffff",
+      "primaryColor": "#d6e9f3",
+      "primaryTextColor": "#1a1a1a",
+      "primaryBorderColor": "#0077bb",
+      "secondaryColor": "#eeeeee",
+      "secondaryTextColor": "#1a1a1a",
+      "secondaryBorderColor": "#808080",
+      "tertiaryColor": "#f7f7f7",
+      "tertiaryTextColor": "#1a1a1a",
+      "tertiaryBorderColor": "#c8c8c8",
+      "lineColor": "#4d4d4d",
+      "textColor": "#1a1a1a",
+      "mainBkg": "#d6e9f3",
+      "nodeBorder": "#0077bb",
+      "clusterBkg": "#f7f7f7",
+      "clusterBorder": "#c8c8c8",
+      "edgeLabelBackground": "#ffffff",
+      "titleColor": "#1a1a1a",
+      "actorBkg": "#d6e9f3",
+      "actorBorder": "#0077bb",
+      "actorTextColor": "#1a1a1a",
+      "actorLineColor": "#808080",
+      "signalColor": "#4d4d4d",
+      "signalTextColor": "#1a1a1a",
+      "labelBoxBkgColor": "#eeeeee",
+      "labelBoxBorderColor": "#c8c8c8",
+      "labelTextColor": "#1a1a1a",
+      "noteBkgColor": "#fbe6d9",
+      "noteBorderColor": "#ee7733",
+      "noteTextColor": "#1a1a1a",
+      "activationBkgColor": "#eeeeee",
+      "activationBorderColor": "#808080",
+      "xyChart": {
+        "backgroundColor": "#ffffff",
+        "titleColor": "#1a1a1a",
+        "xAxisLabelColor": "#4d4d4d",
+        "xAxisTitleColor": "#4d4d4d",
+        "xAxisTickColor": "#c8c8c8",
+        "xAxisLineColor": "#c8c8c8",
+        "yAxisLabelColor": "#4d4d4d",
+        "yAxisTitleColor": "#4d4d4d",
+        "yAxisTickColor": "#c8c8c8",
+        "yAxisLineColor": "#c8c8c8",
+        "plotColorPalette": "#0077bb, #aa3377, #ee7733, #009988, #cc3311, #33bbee, #ee3377"
+      }
+    }
+  },
+  "classes": {
+    "system": "fill:#d6e9f3,stroke:#0077bb,stroke-width:2px,color:#1a1a1a",
+    "external": "fill:#eeeeee,stroke:#808080,color:#1a1a1a",
+    "store": "fill:#d6efec,stroke:#009988,color:#1a1a1a",
+    "async": "fill:#fbdde8,stroke:#ee3377,color:#1a1a1a"
+  }
+}

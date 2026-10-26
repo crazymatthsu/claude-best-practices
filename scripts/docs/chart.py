@@ -2,7 +2,8 @@
 """Render a clean SVG (optionally PNG) line or bar chart from a CSV, for Confluence, slides or Word.
 
 Standard library only. The first CSV column is x (a category, elapsed seconds, or an ISO timestamp); every other
-numeric column is a series (at most 8, in the order given). Non-numeric columns are ignored.
+numeric column is a series (at most as many as the theme has colours, in the order given). Non-numeric columns are
+ignored. Colours come from a theme in scripts/docs/themes (--theme, --list-themes, env DOC_THEME).
 
 Examples:
   python3 scripts/docs/chart.py build/docs/p95.csv --out build/docs/p95.svg --title "p95 latency, Orders API" \
@@ -28,13 +29,13 @@ import zlib
 from datetime import datetime
 from xml.sax.saxutils import escape
 
-# Validated categorical palette, fixed order (see docs/14-technical-documentation.md). Never cycled past 8.
-SERIES_COLORS = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6", "#e34948"]
-SURFACE, INK, INK_2, MUTED, GRID, AXIS, THRESHOLD = "#fcfcfb", "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7", "#d03b3b"
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from doc_themes import list_themes, load_theme  # noqa: E402  (shared with confluence_publish.py)
+
 FONT = "system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
 
 
-def load(path, x_column, columns):
+def load(path, x_column, columns, max_series):
     with open(path, newline="", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
         fields = [c for c in (reader.fieldnames or []) if c]
@@ -64,8 +65,8 @@ def load(path, x_column, columns):
             series[col] = values
     if not series:
         sys.exit("no numeric series found")
-    if len(series) > len(SERIES_COLORS):
-        sys.exit(f"{len(series)} series is too many to read; keep at most {len(SERIES_COLORS)} (fold the rest into 'Other')")
+    if len(series) > max_series:
+        sys.exit(f"{len(series)} series is too many to read; this theme has {max_series} colours (fold the rest into 'Other')")
     return [row.get(xcol, "") for row in rows], series
 
 
@@ -103,7 +104,7 @@ def x_label(raw, fmt):
     return raw
 
 
-def text(x, y, s, size=12, fill=INK_2, anchor="start", weight="normal", extra=""):
+def text(x, y, s, size, fill, anchor="start", weight="normal", extra=""):
     return (f'<text x="{x:.1f}" y="{y:.1f}" font-family="{FONT}" font-size="{size}" fill="{fill}" '
             f'text-anchor="{anchor}" font-weight="{weight}" {extra}>{escape(s)}</text>')
 
@@ -114,8 +115,10 @@ def rounded_top_bar(x, y, w, h, r=4):
             f'Q{x + w:.1f},{y:.1f} {x + w:.1f},{y + r:.1f} V{y + h:.1f} Z')
 
 
-def render(xs, series, args):
+def render(xs, series, args, theme):
     names = list(series)
+    colors, c, threshold_color = theme["series"], theme["chrome"], theme["threshold"]
+    SURFACE, INK, INK_2, MUTED, GRID, AXIS = c["surface"], c["ink"], c["ink2"], c["muted"], c["grid"], c["axis"]
     width, height = args.width, args.height
     legend = len(names) >= 2
     top_margin = 48 + (24 if legend else 0) + (16 if args.subtitle else 0)
@@ -138,7 +141,7 @@ def render(xs, series, args):
     if legend:
         lx, ly = left, top_margin - 14
         for i, name in enumerate(names):
-            color = SERIES_COLORS[i]
+            color = colors[i]
             if args.type == "line":
                 svg.append(f'<line x1="{lx}" y1="{ly}" x2="{lx + 18}" y2="{ly}" stroke="{color}" stroke-width="2" stroke-linecap="round"/>')
                 svg.append(f'<circle cx="{lx + 9}" cy="{ly}" r="3.5" fill="{color}" stroke="{SURFACE}" stroke-width="2"/>')
@@ -166,7 +169,7 @@ def render(xs, series, args):
             svg.append(text(x_of(i), top_margin + plot_h + 18, x_label(xs[i], args.x_format), 11, MUTED, anchor="middle"))
         show_markers = args.markers == "always" or (args.markers == "auto" and n <= 60)
         for si, name in enumerate(names):
-            color, vals = SERIES_COLORS[si], series[name]
+            color, vals = colors[si], series[name]
             segment = []
             for i, v in enumerate(vals + [None]):
                 if v is None:
@@ -199,12 +202,12 @@ def render(xs, series, args):
                 if v is None:
                     continue
                 x = cx - group_w / 2 + si * (bar_w + 2)
-                svg.append(f'<path d="{rounded_top_bar(x, y_of(v), bar_w, y_of(0) - y_of(v))}" fill="{SERIES_COLORS[si]}"/>')
+                svg.append(f'<path d="{rounded_top_bar(x, y_of(v), bar_w, y_of(0) - y_of(v))}" fill="{colors[si]}"/>')
                 if args.end_labels and k <= 2:
                     svg.append(text(x + bar_w / 2, y_of(v) - 6, compact(v), 11, INK_2, anchor="middle"))
     if args.threshold is not None:
         y = y_of(args.threshold)
-        svg.append(f'<line x1="{left}" y1="{y:.1f}" x2="{left + plot_w}" y2="{y:.1f}" stroke="{THRESHOLD}" stroke-width="1.5" stroke-dasharray="6 4"/>')
+        svg.append(f'<line x1="{left}" y1="{y:.1f}" x2="{left + plot_w}" y2="{y:.1f}" stroke="{threshold_color}" stroke-width="1.5" stroke-dasharray="6 4"/>')
         svg.append(text(left + plot_w, y - 6, args.threshold_label or f"threshold {compact(args.threshold)}", 11, INK_2, anchor="end"))
     svg.append("</svg>")
     return "\n".join(svg)
@@ -299,7 +302,7 @@ def markdown_table(xs, series):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("csv")
+    ap.add_argument("csv", nargs="?")
     ap.add_argument("--out", help="output .svg path (default: next to the CSV)")
     ap.add_argument("--type", choices=["line", "bar"], default="line")
     ap.add_argument("--columns", help="comma-separated series columns, in legend order (default: all numeric columns)")
@@ -317,17 +320,33 @@ def main():
     ap.add_argument("--max-x-labels", type=int, default=12)
     ap.add_argument("--width", type=int, default=960)
     ap.add_argument("--height", type=int, default=420)
+    ap.add_argument("--theme", default=os.environ.get("DOC_THEME", "default"),
+                    help="colour theme from scripts/docs/themes (or a path to a theme JSON); env DOC_THEME")
+    ap.add_argument("--colors", help="comma-separated hex colours overriding the theme's series order")
+    ap.add_argument("--list-themes", action="store_true")
     ap.add_argument("--png", action="store_true", help="also write a PNG next to the SVG (2x scale)")
     ap.add_argument("--table", action="store_true", help="print the data as a Markdown table instead of drawing")
     args = ap.parse_args()
+    if args.list_themes:
+        for name in list_themes():
+            print(f"{name:12s} {load_theme(name).get('description', '')}")
+        return
+    if not args.csv:
+        ap.error("a CSV file is required")
+    try:
+        theme = load_theme(args.theme)
+    except (FileNotFoundError, ValueError) as e:
+        sys.exit(str(e))
+    if args.colors:
+        theme["series"] = [col.strip() for col in args.colors.split(",") if col.strip()]
 
-    xs, series = load(args.csv, args.x_column, args.columns)
+    xs, series = load(args.csv, args.x_column, args.columns, len(theme["series"]))
     if args.table:
         print(markdown_table(xs, series))
         return
     out = args.out or re.sub(r"\.csv$", "", args.csv, flags=re.I) + ".svg"
     with open(out, "w", encoding="utf-8") as f:
-        f.write(render(xs, series, args))
+        f.write(render(xs, series, args, theme))
     print(f"wrote {out} ({len(series)} series, {len(xs)} points)", file=sys.stderr)
     if args.png:
         png = re.sub(r"\.svg$", "", out, flags=re.I) + ".png"

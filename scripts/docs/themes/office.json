@@ -1,0 +1,80 @@
+{
+  "name": "office",
+  "description": "Microsoft Office's default theme accents, so charts match PowerPoint and Word decks; the grey accent is left out.",
+  "source": "Microsoft Office theme colours (accents and their darker variants)",
+  "series": [
+    "#4472c4",
+    "#ed7d31",
+    "#833c0b",
+    "#70ad47",
+    "#2f5597",
+    "#548235"
+  ],
+  "threshold": "#c00000",
+  "chrome": {
+    "surface": "#ffffff",
+    "ink": "#262626",
+    "ink2": "#595959",
+    "muted": "#7f7f7f",
+    "grid": "#d9d9d9",
+    "axis": "#bfbfbf"
+  },
+  "mermaid": {
+    "theme": "base",
+    "themeVariables": {
+      "fontFamily": "Segoe UI, Calibri, system-ui, Helvetica, Arial, sans-serif",
+      "fontSize": "14px",
+      "background": "#ffffff",
+      "primaryColor": "#dae3f3",
+      "primaryTextColor": "#262626",
+      "primaryBorderColor": "#4472c4",
+      "secondaryColor": "#ededed",
+      "secondaryTextColor": "#262626",
+      "secondaryBorderColor": "#7f7f7f",
+      "tertiaryColor": "#f2f2f2",
+      "tertiaryTextColor": "#262626",
+      "tertiaryBorderColor": "#bfbfbf",
+      "lineColor": "#595959",
+      "textColor": "#262626",
+      "mainBkg": "#dae3f3",
+      "nodeBorder": "#4472c4",
+      "clusterBkg": "#f2f2f2",
+      "clusterBorder": "#bfbfbf",
+      "edgeLabelBackground": "#ffffff",
+      "titleColor": "#262626",
+      "actorBkg": "#dae3f3",
+      "actorBorder": "#4472c4",
+      "actorTextColor": "#262626",
+      "actorLineColor": "#7f7f7f",
+      "signalColor": "#595959",
+      "signalTextColor": "#262626",
+      "labelBoxBkgColor": "#ededed",
+      "labelBoxBorderColor": "#bfbfbf",
+      "labelTextColor": "#262626",
+      "noteBkgColor": "#fff2cc",
+      "noteBorderColor": "#ffc000",
+      "noteTextColor": "#262626",
+      "activationBkgColor": "#ededed",
+      "activationBorderColor": "#7f7f7f",
+      "xyChart": {
+        "backgroundColor": "#ffffff",
+        "titleColor": "#262626",
+        "xAxisLabelColor": "#595959",
+        "xAxisTitleColor": "#595959",
+        "xAxisTickColor": "#bfbfbf",
+        "xAxisLineColor": "#bfbfbf",
+        "yAxisLabelColor": "#595959",
+        "yAxisTitleColor": "#595959",
+        "yAxisTickColor": "#bfbfbf",
+        "yAxisLineColor": "#bfbfbf",
+        "plotColorPalette": "#4472c4, #c00000, #ed7d31, #833c0b, #70ad47, #2f5597, #548235"
+      }
+    }
+  },
+  "classes": {
+    "system": "fill:#dae3f3,stroke:#4472c4,stroke-width:2px,color:#262626",
+    "external": "fill:#ededed,stroke:#7f7f7f,color:#262626",
+    "store": "fill:#e2efda,stroke:#70ad47,color:#262626",
+    "async": "fill:#fbe5d6,stroke:#ed7d31,color:#262626"
+  }
+}

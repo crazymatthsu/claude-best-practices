@@ -26,6 +26,7 @@ description: Write professional technical documentation for a system or feature 
 5. **Diagrams:** one question per diagram, using the patterns in [diagram-cookbook.md](diagram-cookbook.md). Derive them
    from the code and use its names (same rules as `update-diagrams`): 12 nodes or fewer, labelled edges, a one-line
    caption that states the takeaway. A data-flow diagram always comes with its flow table (volume, format, classification).
+   Colour marks roles only (system, external, store, async), with the `classDef` lines of the document's theme.
 6. **Tables and charts:** every table has units in the header and a stated source and date. Numbers are generated, never
    typed: `perf-report` skill, `scripts/docs/perf_report.py`, `scripts/docs/chart.py`. Charts have one measure and one
    y-axis, a labelled SLO line, a legend for two or more series, and the same data as a table.

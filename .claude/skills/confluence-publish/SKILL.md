@@ -10,8 +10,10 @@ description: Publish a Markdown document from this repo (with Mermaid diagrams, 
    to an existing title updates that page.
 2. **Dry run and inspect:**
    ```bash
-   python3 scripts/docs/confluence_publish.py <doc.md> --dry-run --strict --toc --page-properties
+   python3 scripts/docs/confluence_publish.py <doc.md> --dry-run --strict --toc --page-properties --theme <theme>
    ```
+   `--theme` (`--list-themes`; `atlassian` looks native in Confluence) colours the rendered diagrams; use the same theme
+   as the document's charts.
    Read `build/docs/<name>/page.storage.xml` and look at the rendered diagrams in the same folder. Fix Mermaid errors in
    the Markdown. Unsupported Markdown comes through as plain text: simplify the source rather than editing the XML.
    Relative links need `--link-base <repo blob URL>` to stay clickable.

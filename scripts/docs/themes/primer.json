@@ -1,0 +1,80 @@
+{
+  "name": "primer",
+  "description": "GitHub's Primer colours (six of the seven foreground accents; the orange and red are too alike to use together), so charts and diagrams look at home next to Markdown rendered on GitHub.",
+  "source": "GitHub Primer design system, light mode foreground colours (accent, severe, success, danger, done, sponsors, attention)",
+  "series": [
+    "#0969da",
+    "#1a7f37",
+    "#bf3989",
+    "#9a6700",
+    "#8250df",
+    "#cf222e"
+  ],
+  "threshold": "#cf222e",
+  "chrome": {
+    "surface": "#ffffff",
+    "ink": "#1f2328",
+    "ink2": "#59636e",
+    "muted": "#6e7781",
+    "grid": "#eaeef2",
+    "axis": "#d1d9e0"
+  },
+  "mermaid": {
+    "theme": "base",
+    "themeVariables": {
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Noto Sans, Helvetica, Arial, sans-serif",
+      "fontSize": "14px",
+      "background": "#ffffff",
+      "primaryColor": "#ddf4ff",
+      "primaryTextColor": "#1f2328",
+      "primaryBorderColor": "#0969da",
+      "secondaryColor": "#f6f8fa",
+      "secondaryTextColor": "#1f2328",
+      "secondaryBorderColor": "#8c959f",
+      "tertiaryColor": "#f6f8fa",
+      "tertiaryTextColor": "#1f2328",
+      "tertiaryBorderColor": "#d1d9e0",
+      "lineColor": "#59636e",
+      "textColor": "#1f2328",
+      "mainBkg": "#ddf4ff",
+      "nodeBorder": "#0969da",
+      "clusterBkg": "#f6f8fa",
+      "clusterBorder": "#d1d9e0",
+      "edgeLabelBackground": "#ffffff",
+      "titleColor": "#1f2328",
+      "actorBkg": "#ddf4ff",
+      "actorBorder": "#0969da",
+      "actorTextColor": "#1f2328",
+      "actorLineColor": "#8c959f",
+      "signalColor": "#59636e",
+      "signalTextColor": "#1f2328",
+      "labelBoxBkgColor": "#f6f8fa",
+      "labelBoxBorderColor": "#d1d9e0",
+      "labelTextColor": "#1f2328",
+      "noteBkgColor": "#fff8c5",
+      "noteBorderColor": "#9a6700",
+      "noteTextColor": "#1f2328",
+      "activationBkgColor": "#f6f8fa",
+      "activationBorderColor": "#8c959f",
+      "xyChart": {
+        "backgroundColor": "#ffffff",
+        "titleColor": "#1f2328",
+        "xAxisLabelColor": "#59636e",
+        "xAxisTitleColor": "#59636e",
+        "xAxisTickColor": "#d1d9e0",
+        "xAxisLineColor": "#d1d9e0",
+        "yAxisLabelColor": "#59636e",
+        "yAxisTitleColor": "#59636e",
+        "yAxisTickColor": "#d1d9e0",
+        "yAxisLineColor": "#d1d9e0",
+        "plotColorPalette": "#0969da, #cf222e, #1a7f37, #bf3989, #9a6700, #8250df, #cf222e"
+      }
+    }
+  },
+  "classes": {
+    "system": "fill:#ddf4ff,stroke:#0969da,stroke-width:2px,color:#1f2328",
+    "external": "fill:#f6f8fa,stroke:#8c959f,color:#1f2328",
+    "store": "fill:#dafbe1,stroke:#1a7f37,color:#1f2328",
+    "async": "fill:#fbefff,stroke:#8250df,color:#1f2328"
+  }
+}

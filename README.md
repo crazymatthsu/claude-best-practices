@@ -21,7 +21,7 @@ contracts/
   openapi/orders-api.v1.yaml  # source of truth for the HTTP API
   CHANGELOG.md
 scripts/verify.sh             # the pre-PR gate: same checks locally, in hooks, and in CI
-scripts/docs/                 # perf_report.py, chart.py, confluence_publish.py: results tables, charts, Confluence pages
+scripts/docs/                 # perf_report.py, chart.py, confluence_publish.py, palette_check.py, themes/: tables, charts, Confluence
 build.gradle.kts              # Gradle 9 build: test + integrationTest suites, JaCoCo gate, Java 25 toolchain
 src/main, src/test, src/integrationTest  # demo Spring Boot 4.1 orders-service + unit and integration tests
 docs/                         # the guide (14 topics), architecture, ADRs, specs, templates (incl. templates/tech-doc), examples

@@ -1,0 +1,37 @@
+{
+  "name": "default",
+  "description": "Neutral palette that passes the colour-vision checks on adjacent pairs; the toolkit's default.",
+  "source": "Validated default palette of the dataviz method (blue, orange, aqua, yellow, magenta, green, violet, red)",
+  "series": ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6", "#e34948"],
+  "threshold": "#d03b3b",
+  "chrome": {"surface": "#fcfcfb", "ink": "#0b0b0b", "ink2": "#52514e", "muted": "#898781", "grid": "#e1e0d9", "axis": "#c3c2b7"},
+  "mermaid": {
+    "theme": "base",
+    "themeVariables": {
+      "fontFamily": "system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif",
+      "fontSize": "14px",
+      "background": "#ffffff",
+      "primaryColor": "#dbe9f9", "primaryTextColor": "#0b0b0b", "primaryBorderColor": "#2a78d6",
+      "secondaryColor": "#f0efec", "secondaryTextColor": "#0b0b0b", "secondaryBorderColor": "#898781",
+      "tertiaryColor": "#f7f7f5", "tertiaryTextColor": "#0b0b0b", "tertiaryBorderColor": "#c3c2b7",
+      "lineColor": "#52514e", "textColor": "#0b0b0b",
+      "mainBkg": "#dbe9f9", "nodeBorder": "#2a78d6", "clusterBkg": "#f7f7f5", "clusterBorder": "#c3c2b7",
+      "edgeLabelBackground": "#ffffff", "titleColor": "#0b0b0b",
+      "actorBkg": "#dbe9f9", "actorBorder": "#2a78d6", "actorTextColor": "#0b0b0b", "actorLineColor": "#898781",
+      "signalColor": "#52514e", "signalTextColor": "#0b0b0b",
+      "labelBoxBkgColor": "#f0efec", "labelBoxBorderColor": "#c3c2b7", "labelTextColor": "#0b0b0b",
+      "noteBkgColor": "#fff4d6", "noteBorderColor": "#eda100", "noteTextColor": "#0b0b0b",
+      "activationBkgColor": "#f0efec", "activationBorderColor": "#898781",
+      "xyChart": {"backgroundColor": "#ffffff", "titleColor": "#0b0b0b", "xAxisLabelColor": "#52514e", "xAxisTitleColor": "#52514e",
+                  "xAxisTickColor": "#c3c2b7", "xAxisLineColor": "#c3c2b7", "yAxisLabelColor": "#52514e", "yAxisTitleColor": "#52514e",
+                  "yAxisTickColor": "#c3c2b7", "yAxisLineColor": "#c3c2b7",
+                  "plotColorPalette": "#2a78d6, #d03b3b, #1baf7a, #eda100, #e87ba4, #008300, #6250d6, #eb6834"}
+    }
+  },
+  "classes": {
+    "system": "fill:#dbe9f9,stroke:#2a78d6,stroke-width:2px,color:#0b0b0b",
+    "external": "fill:#f0efec,stroke:#898781,color:#0b0b0b",
+    "store": "fill:#d9f2e8,stroke:#1baf7a,color:#0b0b0b",
+    "async": "fill:#e9e5fb,stroke:#6250d6,color:#0b0b0b"
+  }
+}
