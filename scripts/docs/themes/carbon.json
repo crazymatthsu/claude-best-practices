@@ -1,0 +1,82 @@
+{
+  "name": "carbon",
+  "description": "IBM Carbon's data-visualisation categorical palette (a subset in Carbon's order) with Carbon greys; a good fit for enterprise and IBM-stack teams.",
+  "source": "IBM Carbon Design System, data visualisation colour palettes (categorical, light theme)",
+  "series": [
+    "#6929c4",
+    "#1192e8",
+    "#9f1853",
+    "#a56eff",
+    "#198038",
+    "#ee538b",
+    "#b28600",
+    "#009d9a"
+  ],
+  "threshold": "#da1e28",
+  "chrome": {
+    "surface": "#ffffff",
+    "ink": "#161616",
+    "ink2": "#525252",
+    "muted": "#6f6f6f",
+    "grid": "#e0e0e0",
+    "axis": "#c6c6c6"
+  },
+  "mermaid": {
+    "theme": "base",
+    "themeVariables": {
+      "fontFamily": "IBM Plex Sans, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif",
+      "fontSize": "14px",
+      "background": "#ffffff",
+      "primaryColor": "#edf5ff",
+      "primaryTextColor": "#161616",
+      "primaryBorderColor": "#0f62fe",
+      "secondaryColor": "#f4f4f4",
+      "secondaryTextColor": "#161616",
+      "secondaryBorderColor": "#8d8d8d",
+      "tertiaryColor": "#f4f4f4",
+      "tertiaryTextColor": "#161616",
+      "tertiaryBorderColor": "#c6c6c6",
+      "lineColor": "#525252",
+      "textColor": "#161616",
+      "mainBkg": "#edf5ff",
+      "nodeBorder": "#0f62fe",
+      "clusterBkg": "#f4f4f4",
+      "clusterBorder": "#c6c6c6",
+      "edgeLabelBackground": "#ffffff",
+      "titleColor": "#161616",
+      "actorBkg": "#edf5ff",
+      "actorBorder": "#0f62fe",
+      "actorTextColor": "#161616",
+      "actorLineColor": "#8d8d8d",
+      "signalColor": "#525252",
+      "signalTextColor": "#161616",
+      "labelBoxBkgColor": "#f4f4f4",
+      "labelBoxBorderColor": "#c6c6c6",
+      "labelTextColor": "#161616",
+      "noteBkgColor": "#fcf4d6",
+      "noteBorderColor": "#f1c21b",
+      "noteTextColor": "#161616",
+      "activationBkgColor": "#f4f4f4",
+      "activationBorderColor": "#8d8d8d",
+      "xyChart": {
+        "backgroundColor": "#ffffff",
+        "titleColor": "#161616",
+        "xAxisLabelColor": "#525252",
+        "xAxisTitleColor": "#525252",
+        "xAxisTickColor": "#c6c6c6",
+        "xAxisLineColor": "#c6c6c6",
+        "yAxisLabelColor": "#525252",
+        "yAxisTitleColor": "#525252",
+        "yAxisTickColor": "#c6c6c6",
+        "yAxisLineColor": "#c6c6c6",
+        "plotColorPalette": "#6929c4, #da1e28, #1192e8, #9f1853, #a56eff, #198038, #ee538b, #b28600, #009d9a"
+      }
+    }
+  },
+  "classes": {
+    "system": "fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616",
+    "external": "fill:#f4f4f4,stroke:#8d8d8d,color:#161616",
+    "store": "fill:#defbe6,stroke:#198038,color:#161616",
+    "async": "fill:#e8daff,stroke:#6929c4,color:#161616"
+  }
+}

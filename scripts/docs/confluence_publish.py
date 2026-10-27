@@ -22,6 +22,7 @@ lists (nested), tables, fenced code (code macro), ```mermaid (rendered image), b
 comments (dropped, so template guidance never reaches the page). Anything else is passed through as text.
 
 Mermaid rendering uses `mmdc` from PATH, or MERMAID_CMD / --mermaid-cmd (e.g. "npx -y -p @mermaid-js/mermaid-cli mmdc").
+Diagram colours follow --theme (scripts/docs/themes, see --list-themes) or a Mermaid config given with --mermaid-config.
 Set PUPPETEER_CONFIG to a puppeteer config JSON if Chromium needs flags (e.g. --no-sandbox in containers).
 """
 from __future__ import annotations
@@ -43,6 +44,9 @@ import urllib.request
 import uuid
 import xml.etree.ElementTree as ET
 from xml.sax.saxutils import escape
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from doc_themes import list_themes, load_theme, mermaid_config  # noqa: E402  (shared with chart.py)
 
 FENCE_RE = re.compile(r"^\s{0,3}(`{3,}|~{3,})\s*([\w+#.-]*)\s*$")
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*?)\s*#*\s*$")
@@ -69,7 +73,8 @@ def macro(name, body, title=None):
 
 
 class Converter:
-    def __init__(self, doc_path, out_dir, image_format="png", mermaid_cmd=None, link_base=None, page_properties=False):
+    def __init__(self, doc_path, out_dir, image_format="png", mermaid_cmd=None, link_base=None, page_properties=False,
+                 mermaid_config_path=None):
         self.doc_dir = os.path.dirname(os.path.abspath(doc_path))
         self.stem = re.sub(r"[^A-Za-z0-9_-]+", "-", os.path.splitext(os.path.basename(doc_path))[0]).strip("-") or "doc"
         self.out_dir = out_dir
@@ -77,6 +82,7 @@ class Converter:
         self.mermaid_cmd = mermaid_cmd
         self.link_base = link_base.rstrip("/") if link_base else None
         self.page_properties = page_properties
+        self.mermaid_config_path = mermaid_config_path
         self.attachments = []      # local file paths to upload
         self.diagrams = 0
         self.unrendered = []
@@ -305,6 +311,8 @@ class Converter:
         cmd = shlex.split(self.mermaid_cmd) + ["-i", src, "-o", out_path, "-b", "white", "-q"]
         if self.image_format == "png":
             cmd += ["-s", "2"]
+        if self.mermaid_config_path:
+            cmd += ["-c", self.mermaid_config_path]
         if os.environ.get("PUPPETEER_CONFIG"):
             cmd += ["-p", os.environ["PUPPETEER_CONFIG"]]
         try:
@@ -486,7 +494,7 @@ def validate_storage(xhtml):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("markdown")
+    ap.add_argument("markdown", nargs="?")
     ap.add_argument("--title", help="page title (default: the document's first H1, then the file name)")
     ap.add_argument("--space", help="space key (required to create a page)")
     ap.add_argument("--parent-id", help="parent page id for a new page")
@@ -497,6 +505,10 @@ def main():
     ap.add_argument("--image-format", choices=["png", "svg"], default="png")
     ap.add_argument("--mermaid-cmd", default=os.environ.get("MERMAID_CMD") or (shutil.which("mmdc") and "mmdc"),
                     help="command that renders Mermaid (default: mmdc on PATH)")
+    ap.add_argument("--theme", default=os.environ.get("DOC_THEME"),
+                    help="colour theme for rendered diagrams, from scripts/docs/themes (see --list-themes); env DOC_THEME")
+    ap.add_argument("--mermaid-config", help="a Mermaid config JSON for mermaid-cli (-c); overrides --theme")
+    ap.add_argument("--list-themes", action="store_true")
     ap.add_argument("--link-base", help="URL prefix that makes relative Markdown links absolute, e.g. the repo's blob URL")
     ap.add_argument("--labels", help="comma-separated page labels")
     ap.add_argument("--toc", action="store_true", help="prepend a table-of-contents macro")
@@ -505,13 +517,29 @@ def main():
     ap.add_argument("--dry-run", action="store_true", help="convert and render only; no network")
     ap.add_argument("--strict", action="store_true", help="fail if a diagram could not be rendered")
     args = ap.parse_args()
+    if args.list_themes:
+        for name in list_themes():
+            print(f"{name:12s} {load_theme(name).get('description', '')}")
+        return
+    if not args.markdown:
+        ap.error("a Markdown file is required")
 
     with open(args.markdown, encoding="utf-8") as f:
         text = f.read()
     stem = os.path.splitext(os.path.basename(args.markdown))[0]
     out_dir = args.out_dir or os.path.join("build", "docs", stem)
     os.makedirs(out_dir, exist_ok=True)
-    conv = Converter(args.markdown, out_dir, args.image_format, args.mermaid_cmd, args.link_base, args.page_properties)
+    config_path = args.mermaid_config
+    if not config_path and args.theme:
+        try:
+            theme = load_theme(args.theme)
+        except (FileNotFoundError, ValueError) as e:
+            sys.exit(str(e))
+        config_path = os.path.join(out_dir, "mermaid-config.json")
+        with open(config_path, "w", encoding="utf-8") as f:
+            json.dump(mermaid_config(theme), f, indent=2)
+    conv = Converter(args.markdown, out_dir, args.image_format, args.mermaid_cmd, args.link_base, args.page_properties,
+                     config_path)
     xhtml = conv.convert(text)
     if args.toc:
         xhtml = TOC_MACRO + xhtml

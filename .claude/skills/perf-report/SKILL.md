@@ -24,8 +24,9 @@ description: Turn load or performance test results (JMeter JTL, k6 summary JSON 
    ```bash
    python3 scripts/docs/chart.py docs/performance/images/p95.csv --out docs/performance/images/p95.svg \
        --title "p95 latency, <system>" --subtitle "<environment, date, load>" --y-label ms \
-       --threshold 300 --threshold-label "SLO 300 ms" --png
+       --threshold 300 --threshold-label "SLO 300 ms" --theme <theme> --png
    ```
+   The theme (`--list-themes`; `atlassian` for Confluence-native pages) is the one the document's diagrams use.
    One measure per chart, one y-axis, a legend for two or more series, the SLO as a labelled line. Commit the CSV and
    the SVG next to the document; PNGs are for Confluence Data Center.
 5. **Write the report** from `docs/templates/tech-doc/performance-report.md` into `docs/performance/<system>-<date>.md`:

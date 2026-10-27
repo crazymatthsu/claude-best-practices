@@ -72,6 +72,39 @@ Chart rules the scripts follow and the checklist asks for: one measure per chart
 labelled threshold line for the SLO, a legend for two or more series, a fixed colour order that passes colour-vision
 checks, and the same data available as a table (`chart.py --table`).
 
+## Colour schemes for charts and diagrams
+
+Both scripts take `--theme <name>` (or `DOC_THEME` in the environment) and read `scripts/docs/themes/<name>.json`:
+series colours for charts, Mermaid theme variables for rendered diagrams, and `classDef` strings for diagram roles
+(system, external, store, async; see the cookbook's Colour section). Use one theme for a whole document.
+
+| Theme | Based on | Use it when |
+|---|---|---|
+| `default` | the validated neutral palette | there is no house style; prints and projects well |
+| `atlassian` | Atlassian Design System colours and greys | the pages live in Confluence or Jira and should look native |
+| `carbon` | IBM Carbon data-visualisation palette | an enterprise or IBM-stack house style |
+| `primer` | GitHub Primer | documents are read mostly on GitHub |
+| `office` | Microsoft Office theme accents and their darker variants | charts are pasted into PowerPoint or Word |
+| `okabe-ito` | Okabe and Ito's colour-universal palette | scientific or regulated audiences that ask for a known colour-blind-safe set |
+| `tol` | Paul Tol's vibrant scheme | the same need, a second option |
+
+Every theme passes `scripts/docs/palette_check.py`: OKLab lightness and chroma of each colour, separation of
+neighbouring series under simulated protanopia and deuteranopia, separation of every pair for full colour vision, and
+WCAG contrast against the surface. The series are ordered so that neighbouring colours stay apart under colour-vision
+deficiency, which is why some themes do not follow their design system's published order. Light colours below 3:1
+contrast (orange, sky blue) are reported as warnings; the charts cover them with the legend, direct labels and the
+table view. Tableau 10 is deliberately not shipped: four of its colours fall below the chroma floor and its red and
+green are indistinguishable under deuteranopia.
+
+Your own brand palette: copy a theme JSON, replace the colours, and keep an order that passes:
+
+```bash
+python3 scripts/docs/palette_check.py "#0052cc,#ff8b00,#00875a,#de350b"   # before committing the theme
+python3 scripts/docs/palette_check.py --theme acme                         # the committed theme
+python3 scripts/docs/chart.py results.csv --theme acme --out chart.svg
+python3 scripts/docs/confluence_publish.py doc.md --theme acme --dry-run   # themed diagram images
+```
+
 ## Publishing to Confluence
 
 Three routes, in order of preference:
@@ -124,6 +157,6 @@ convenience for people who start in Confluence.
 | `.claude/skills/tech-doc/` | the skill, [quality-checklist.md](../.claude/skills/tech-doc/quality-checklist.md), [diagram-cookbook.md](../.claude/skills/tech-doc/diagram-cookbook.md) |
 | `.claude/skills/perf-report/`, `.claude/skills/confluence-publish/` | the report and publishing skills |
 | `docs/templates/tech-doc/` | [architecture.md](templates/tech-doc/architecture.md), [performance-report.md](templates/tech-doc/performance-report.md) |
-| `scripts/docs/` | `perf_report.py`, `chart.py`, `confluence_publish.py` |
+| `scripts/docs/` | `perf_report.py`, `chart.py`, `confluence_publish.py`, `palette_check.py`, `themes/` |
 | `docs/examples/perf/` | sample JTL and the report generated from it |
 | `docs/architecture/`, `docs/performance/` | where the documents you write go |

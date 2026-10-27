@@ -200,6 +200,44 @@ gantt
     Full cutover                :milestone, a4, after a3, 0d
 ```
 
+## Colour
+
+Diagrams and charts in one document share one theme: `--theme <name>` on `scripts/docs/chart.py` and
+`scripts/docs/confluence_publish.py`, or `DOC_THEME=<name>` in the environment. Themes live in `scripts/docs/themes/`
+(`--list-themes`); each holds the chart series colours, the Mermaid theme variables used when diagrams are rendered to
+images, and `classDef` strings for node roles. On GitHub, Mermaid keeps its default look; the theme applies when the
+publisher renders the images.
+
+Colour marks a role, never decoration. Four roles are enough; copy their `classDef` lines from the theme's `classes`:
+
+```mermaid
+flowchart LR
+    customer([Customer]) -->|orders| shop[Web shop]
+    shop -->|REST/JSON| orders[Orders service]
+    orders -->|SQL| db[(Orders DB)]
+    orders -->|OrderPlaced| bus[(Message bus)]
+    classDef system fill:#dbe9f9,stroke:#2a78d6,stroke-width:2px,color:#0b0b0b
+    classDef external fill:#f0efec,stroke:#898781,color:#0b0b0b
+    classDef store fill:#d9f2e8,stroke:#1baf7a,color:#0b0b0b
+    classDef async fill:#e9e5fb,stroke:#6250d6,color:#0b0b0b
+    class orders system
+    class customer,shop external
+    class db store
+    class bus async
+```
+
+| Role | Look | Meaning |
+|---|---|---|
+| `system` | tinted fill, strong border | the system this document describes; one per diagram |
+| `external` | grey | people and systems outside your control |
+| `store` | green tint | databases, caches, object stores |
+| `async` | violet tint | queues, topics, event buses |
+
+The table above is the legend, so diagrams carry no colour legend of their own. To theme one diagram where it is
+rendered without the publisher (for example on GitHub), add an init directive as its first line, with the variables
+from the theme JSON under `mermaid`:
+`%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#deebff", "primaryBorderColor": "#0052cc"}}}%%`.
+
 ## Rendering outside GitHub
 
 Confluence does not render Mermaid natively. Options, in order of preference:

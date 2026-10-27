@@ -1,0 +1,79 @@
+{
+  "name": "atlassian",
+  "description": "Blends in with Confluence and Jira: five Atlassian Design System hues (the brand's green and teal are too alike to use together) with the N800/N500 greys for text and lines.",
+  "source": "Atlassian Design System colour palette (B400, Y500, G400, R400, P300, T400 and the neutrals)",
+  "series": [
+    "#0052cc",
+    "#ff8b00",
+    "#00875a",
+    "#de350b",
+    "#00a3bf"
+  ],
+  "threshold": "#bf2600",
+  "chrome": {
+    "surface": "#ffffff",
+    "ink": "#172b4d",
+    "ink2": "#42526e",
+    "muted": "#6b778c",
+    "grid": "#ebecf0",
+    "axis": "#dfe1e6"
+  },
+  "mermaid": {
+    "theme": "base",
+    "themeVariables": {
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
+      "fontSize": "14px",
+      "background": "#ffffff",
+      "primaryColor": "#deebff",
+      "primaryTextColor": "#172b4d",
+      "primaryBorderColor": "#0052cc",
+      "secondaryColor": "#f4f5f7",
+      "secondaryTextColor": "#172b4d",
+      "secondaryBorderColor": "#a5adba",
+      "tertiaryColor": "#fafbfc",
+      "tertiaryTextColor": "#172b4d",
+      "tertiaryBorderColor": "#dfe1e6",
+      "lineColor": "#42526e",
+      "textColor": "#172b4d",
+      "mainBkg": "#deebff",
+      "nodeBorder": "#0052cc",
+      "clusterBkg": "#fafbfc",
+      "clusterBorder": "#dfe1e6",
+      "edgeLabelBackground": "#ffffff",
+      "titleColor": "#172b4d",
+      "actorBkg": "#deebff",
+      "actorBorder": "#0052cc",
+      "actorTextColor": "#172b4d",
+      "actorLineColor": "#a5adba",
+      "signalColor": "#42526e",
+      "signalTextColor": "#172b4d",
+      "labelBoxBkgColor": "#f4f5f7",
+      "labelBoxBorderColor": "#dfe1e6",
+      "labelTextColor": "#172b4d",
+      "noteBkgColor": "#fffae6",
+      "noteBorderColor": "#ff8b00",
+      "noteTextColor": "#172b4d",
+      "activationBkgColor": "#f4f5f7",
+      "activationBorderColor": "#a5adba",
+      "xyChart": {
+        "backgroundColor": "#ffffff",
+        "titleColor": "#172b4d",
+        "xAxisLabelColor": "#42526e",
+        "xAxisTitleColor": "#42526e",
+        "xAxisTickColor": "#dfe1e6",
+        "xAxisLineColor": "#dfe1e6",
+        "yAxisLabelColor": "#42526e",
+        "yAxisTitleColor": "#42526e",
+        "yAxisTickColor": "#dfe1e6",
+        "yAxisLineColor": "#dfe1e6",
+        "plotColorPalette": "#0052cc, #bf2600, #ff8b00, #00875a, #de350b, #00a3bf"
+      }
+    }
+  },
+  "classes": {
+    "system": "fill:#deebff,stroke:#0052cc,stroke-width:2px,color:#172b4d",
+    "external": "fill:#f4f5f7,stroke:#a5adba,color:#172b4d",
+    "store": "fill:#e3fcef,stroke:#00875a,color:#172b4d",
+    "async": "fill:#eae6ff,stroke:#6554c0,color:#172b4d"
+  }
+}
